@@ -4,6 +4,7 @@ import { Ticket, User } from '@acme/shared-models';
 
 import styles from './app.module.css';
 import Tickets from './tickets/tickets';
+import Button from '@mui/material/Button';
 
 const App = () => {
   const [tickets, setTickets] = useState([] as Ticket[]);
@@ -29,6 +30,7 @@ const App = () => {
   return (
     <div className={styles['app']}>
       <h1>Ticketing App</h1>
+      <Button variant="contained">Hello world</Button>
       <Routes>
         <Route path="/" element={<Tickets tickets={tickets} />} />
         {/* Hint: Try `npx nx g component TicketDetails --project=client --no-export` to generate this component  */}
