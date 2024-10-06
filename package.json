@@ -11,15 +11,18 @@
     "@emotion/styled": "^11.13.0",
     "@fontsource/roboto": "^5.1.0",
     "@mui/icons-material": "^6.1.2",
+    "@mui/lab": "^6.0.0-beta.10",
     "@mui/material": "^6.1.2",
     "@nestjs/common": "9.2.1",
     "@nestjs/core": "9.2.1",
     "@nestjs/platform-express": "9.2.1",
+    "axios": "^1.7.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router": "^6.3.0",
     "react-router-dom": "6.4.3",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
