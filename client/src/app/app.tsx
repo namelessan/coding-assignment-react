@@ -44,6 +44,10 @@ const App = () => {
     setUsers(data);
     setStoreUsers(data);
   }
+
+  function updateTicket(ticket: Ticket) {
+    fetchTickets();
+  }
   // Very basic way to synchronize state with server.
   // Feel free to use any state/fetch library you want (e.g. react-query, xstate, redux, etc.).
   useEffect(() => {
@@ -89,7 +93,12 @@ const App = () => {
           <TicketCreate onCreate={fetchTickets}></TicketCreate>
         </div>
         <Routes>
-          <Route path="/" element={<Tickets tickets={filteredTickets} />}>
+          <Route
+            path="/"
+            element={
+              <Tickets tickets={filteredTickets} updateTicket={updateTicket} />
+            }
+          >
             <Route path="/:id" element={<TicketDetails />} />
           </Route>
         </Routes>
