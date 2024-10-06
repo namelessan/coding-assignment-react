@@ -1,7 +1,45 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+.ticketDetail {
+  /* width: 100%; */
+  height: 100%;
+  padding: 20px;
+}
+
+.description {
+  padding-bottom: 10px;
+}
+
+.descriptionText {
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px,
+    rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.assignee {
+  display: flex;
+  align-items: center;
+}
+
+.assigneeLabel {
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 0;
+}
+
+.ticketDetailFooter {
+  padding-top: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
