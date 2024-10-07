@@ -6,6 +6,7 @@ import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { services } from '../httpService';
 import LoadingButton from '@mui/lab/LoadingButton';
+import { useToasterStore } from '../store/toaster';
 /* eslint-disable-next-line */
 export interface TicketCreateProps {
   onCreate: () => void;
@@ -15,6 +16,8 @@ export function TicketCreate(props: TicketCreateProps) {
   const [visible, setVisible] = useState(false);
   const [description, setDescription] = useState('');
   const [loading, setLoading] = useState(false);
+  const { showToaster } = useToasterStore();
+
   const onClose = () => {
     setVisible(false);
   };
@@ -33,8 +36,13 @@ export function TicketCreate(props: TicketCreateProps) {
       const data = await services.ticket.create(payload);
       setVisible(false);
       props.onCreate();
+      showToaster({ message: 'Create new Ticket successfully' });
     } catch (error) {
       console.log('Error occurred when creating ticket');
+      showToaster({
+        message: 'Fail when creating new ticket',
+        severity: 'error',
+      });
     }
     setLoading(false);
   };

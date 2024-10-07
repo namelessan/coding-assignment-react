@@ -2,6 +2,7 @@ import { Button, Popover, Typography } from '@mui/material';
 import styles from './ticket-unassign.module.css';
 import { useState } from 'react';
 import { services } from '../httpService';
+import { useToasterStore } from '../store/toaster';
 
 /* eslint-disable-next-line */
 export interface TicketUnassignProps {
@@ -12,6 +13,7 @@ export interface TicketUnassignProps {
 
 export function TicketUnassign(props: TicketUnassignProps) {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const { showToaster } = useToasterStore();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -22,9 +24,17 @@ export function TicketUnassign(props: TicketUnassignProps) {
   };
 
   const onUnassign = async () => {
-    await services.ticket.unassign(parseInt(props.ticketId));
+    try {
+      await services.ticket.unassign(parseInt(props.ticketId));
+      props.unassigned();
+      showToaster({ message: 'Unassigned ticket', severity: 'info' });
+    } catch (error) {
+      showToaster({
+        message: 'Error occurred when unassigning ticket',
+        severity: 'info',
+      });
+    }
     handleClose();
-    props.unassigned();
   };
 
   const open = Boolean(anchorEl);

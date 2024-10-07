@@ -9,3 +9,5 @@ export type Ticket = {
   assigneeId: number;
   completed: boolean;
 };
+
+export type Severity = 'success' | 'info' | 'warning' | 'error';

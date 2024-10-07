@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import styles from './ticket-details.module.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import Drawer from '@mui/material/Drawer';
@@ -8,17 +8,22 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useUserStore } from '../store/users';
 import { FormControl, MenuItem } from '@mui/material';
 import TicketUnassign from '../ticket-unassign/ticket-unassign';
+import { useToasterStore } from '../store/toaster';
 
 /* eslint-disable-next-line */
 export interface TicketDetailsProps {}
 
 export function TicketDetails(props: TicketDetailsProps) {
+  const { showToaster } = useToasterStore();
   const { id } = useParams();
   const [visible, setVisible] = useState(false);
   const [ticket, setTicket] = useState({} as Ticket);
   const [userId, setUserId] = useState('');
   const navigate = useNavigate();
   const { users } = useUserStore();
+  const user = useMemo(() => {
+    return users.find((u) => u.id === parseInt(userId));
+  }, [userId, users]);
 
   const onClose = () => {
     setVisible(false);
@@ -28,7 +33,15 @@ export function TicketDetails(props: TicketDetailsProps) {
   async function onSelectUser(event: SelectChangeEvent) {
     const userId = event.target.value;
     setUserId(userId);
-    await services.ticket.assign(ticket.id, parseInt(userId));
+    try {
+      await services.ticket.assign(ticket.id, parseInt(userId));
+      showToaster({ message: `Assigned user ${user?.name} to ticket` });
+    } catch (error) {
+      showToaster({
+        message: `Failed when assigning user ${user?.name} to ticket`,
+        severity: 'error',
+      });
+    }
   }
 
   async function fetchTicket() {

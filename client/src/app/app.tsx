@@ -12,6 +12,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import TicketCreate from './ticket-create/ticket-create';
+import Toaster from './toaster/toaster';
 
 const App = () => {
   const [tickets, setTickets] = useState([] as Ticket[]);
@@ -103,6 +104,7 @@ const App = () => {
           </Route>
         </Routes>
       </div>
+      <Toaster></Toaster>
     </div>
   );
 };

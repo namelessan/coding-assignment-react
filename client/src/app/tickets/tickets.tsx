@@ -5,6 +5,7 @@ import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import Checkbox from '@mui/material/Checkbox';
 import { services } from '../httpService';
+import { useToasterStore } from '../store/toaster';
 export interface TicketsProps {
   tickets: Ticket[];
   updateTicket: (ticket: Ticket) => void;
@@ -12,6 +13,7 @@ export interface TicketsProps {
 const label = { inputProps: { 'aria-label': 'Checkbox' } };
 
 export function Tickets(props: TicketsProps) {
+  const { showToaster } = useToasterStore();
   async function onCheckTicket(
     event: React.ChangeEvent<HTMLInputElement>,
     ticket: Ticket
@@ -19,8 +21,13 @@ export function Tickets(props: TicketsProps) {
     const value = event.target.checked;
     if (value) {
       await services.ticket.complete(ticket.id);
+      showToaster({ message: `Marked ticket ${ticket.id} as completed` });
     } else {
       await services.ticket.incomplete(ticket.id);
+      showToaster({
+        message: `Marked ticket ${ticket.id} as incomplete`,
+        severity: 'info',
+      });
     }
     props.updateTicket({ ...ticket, completed: Boolean(value) });
   }
