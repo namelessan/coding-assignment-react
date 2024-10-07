@@ -40,7 +40,11 @@ export function Tickets(props: TicketsProps) {
         {props.tickets.length ? (
           <div className={styles['ticketList']}>
             {props.tickets.map((t) => (
-              <div key={t.id} className={styles['ticketItem']}>
+              <div
+                data-testid="ticket-item"
+                key={t.id}
+                className={styles['ticketItem']}
+              >
                 <Checkbox
                   {...label}
                   checked={t.completed}

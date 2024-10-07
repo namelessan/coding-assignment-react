@@ -56,13 +56,23 @@ export function TicketCreate(props: TicketCreateProps) {
 
   return (
     <div className={styles['ticketCreate']}>
-      <Button variant="contained" onClick={onClickCreate}>
+      <Button
+        data-testid="create-button"
+        variant="contained"
+        onClick={onClickCreate}
+      >
         <AddIcon></AddIcon>
       </Button>
-      <Drawer anchor="right" open={visible} onClose={onClose}>
+      <Drawer
+        data-testid="create-modal"
+        anchor="right"
+        open={visible}
+        onClose={onClose}
+      >
         <div className={styles['descriptionContainer']}>
           <div className={styles['header']}>Create new ticket</div>
           <TextField
+            data-testid="create-description"
             id="description"
             label="description"
             multiline
@@ -73,6 +83,7 @@ export function TicketCreate(props: TicketCreateProps) {
           />
           <div className={styles['footer']}>
             <LoadingButton
+              data-testid="confirm-button"
               variant="contained"
               disabled={!description}
               loading={loading}

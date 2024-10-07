@@ -15,6 +15,7 @@ export function Toaster(props: ToasterProps) {
       onClose={hideToaster}
     >
       <Alert
+        data-testid="toaster-test-id"
         onClose={hideToaster}
         severity={severity}
         variant="filled"
